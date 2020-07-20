@@ -2065,6 +2065,9 @@ type Knobs struct {
 	// NoGraphic completely disables graphic output.
 	NoGraphic bool
 
+	// Exit instead of rebooting VM
+	NoReboot bool
+
 	// Daemonize will turn the qemu process into a daemon
 	Daemonize bool
 
@@ -2430,6 +2433,10 @@ func (config *Config) appendKnobs() {
 
 	if config.Knobs.NoGraphic {
 		config.qemuParams = append(config.qemuParams, "-nographic")
+	}
+
+	if config.Knobs.NoReboot {
+		config.qemuParams = append(config.qemuParams, "--no-reboot")
 	}
 
 	if config.Knobs.Daemonize {
